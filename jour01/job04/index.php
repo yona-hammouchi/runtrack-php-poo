@@ -37,7 +37,12 @@ class Point
 }
 
 $point = new Point(5, 8);
+
 echo $point->afficherLesPoints() . "\n";
 echo $point->afficherX() . "\n";
 echo $point->afficherY() . "\n";
+
+$point->changerX(15);
+$point->changery(15);
+
 echo $point->afficherLesPoints();
