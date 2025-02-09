@@ -1,12 +1,11 @@
 <?php
-// Classe Personne
 class Personne
 {
-    private int $age = 14;
+    protected int $age = 14; // Attribut age initialisé à 14
 
-    public function __construct(int $age = 14)
+    public function afficherAge(): void
     {
-        $this->age = $age;
+        echo "J'ai " . $this->age . " ans\n";
     }
 
     public function bonjour(): void
@@ -14,28 +13,12 @@ class Personne
         echo "Hello\n";
     }
 
-    public function afficherAge(): void
+    public function modifierAge(int $ParamNouvelAge): void
     {
-        echo "J'ai " . $this->age . " ans\n";
-    }
-
-    public function modifierAge(int $nouvelAge): void
-    {
-        if ($nouvelAge < 0) {
-            echo "Erreur : L'âge ne peut pas être négatif.\n";
-        } else {
-            $this->age = $nouvelAge;
-        }
-    }
-
-    // Getter pour l'âge
-    public function getAge(): int
-    {
-        return $this->age;
+        $this->age = $ParamNouvelAge;
     }
 }
 
-// Classe Eleve qui hérite de Personne
 class Eleve extends Personne
 {
     public function allerEnCours(): void
@@ -43,17 +26,31 @@ class Eleve extends Personne
         echo "Je vais en cours\n";
     }
 
-    // Redéfinir la méthode afficherAge pour l'élève
     public function afficherAge(): void
     {
-        echo "J'ai " . $this->getAge() . " ans (élève)\n";
+        echo "J'ai " . $this->age . " ans\n";
     }
 }
 
-// Création d'un élève
-$eleve = new Eleve(16);
+class Professeur extends Personne
+{
+    protected string $matiereEnseignee;
 
-// Vérification des méthodes
-$eleve->bonjour();         // Doit afficher "Hello"
-$eleve->afficherAge();     // Doit afficher "J'ai 16 ans (élève)"
-$eleve->allerEnCours();    // Doit afficher "Je vais en cours"
+    public function __construct(string $matiere)
+    {
+        $this->matiereEnseignee = $matiere;
+    }
+
+    public function enseigner(): void
+    {
+        echo "Le cours va commencer\n";
+    }
+}
+
+// Création d'une Personne
+$personne = new Personne("john", "doe");
+$personne->afficherAge();
+
+// Création d'un Eleve
+$eleve = new Eleve("joe", "dupont");
+$eleve->afficherAge();
